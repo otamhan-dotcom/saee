@@ -361,12 +361,16 @@
   // Cycles alongside the quotes. Add more paths here and they join the rotation.
   const QUOTE_IMAGES = [
     'assets/images/testimonials/microscope-1.jpg',
+    'assets/images/testimonials/portrait-1.jpg',
   ];
+  // Warm the cache so swapping never shows a blank frame mid-crossfade
+  QUOTE_IMAGES.forEach((src) => { const i = new Image(); i.src = src; });
 
   if (quotes.length && quoteStage) {
     let qi = 0;
     let qTimer = null;
     let qTl = null;
+    let imgTl = null;
 
     quoteTotal.textContent = quotes.length;
 
@@ -392,17 +396,17 @@
       to.classList.add('active');
 
       // Swap the accompanying photo, crossfading so it doesn't pop
-      if (quoteImage && QUOTE_IMAGES.length > 1) {
+      if (quoteImage && QUOTE_IMAGES.length) {
         const next = QUOTE_IMAGES[qi % QUOTE_IMAGES.length];
-        if (!quoteImage.src.endsWith(next)) {
+        if (quoteImage.getAttribute('src') !== next) {
           if (hasGSAP && !reduced) {
-            gsap.to(quoteImage, {
-              opacity: 0, duration: 0.3, ease: 'power2.in',
-              onComplete: () => {
-                quoteImage.src = next;
-                gsap.to(quoteImage, { opacity: 1, duration: 0.5, ease: 'power2.out' });
-              },
-            });
+            // Kill any in-flight swap first, otherwise a finishing crossfade
+            // can overwrite a newer image when clicks come quickly.
+            if (imgTl) imgTl.kill();
+            imgTl = gsap.timeline()
+              .to(quoteImage, { opacity: 0, duration: 0.28, ease: 'power2.in' })
+              .add(() => { quoteImage.src = next; })
+              .to(quoteImage, { opacity: 1, duration: 0.5, ease: 'power2.out' });
           } else {
             quoteImage.src = next;
           }
