@@ -133,16 +133,6 @@
       });
     }
 
-    // Timeline rail fill
-    const timeline = document.getElementById('timeline');
-    const timelineFill = document.getElementById('timelineFill');
-    if (timeline && timelineFill) {
-      gsap.to(timelineFill, {
-        height: '100%',
-        ease: 'none',
-        scrollTrigger: { trigger: timeline, start: 'top 70%', end: 'bottom 80%', scrub: 0.6 },
-      });
-    }
 
     // Case grid stagger on first view
     gsap.utils.toArray('.case-panel').forEach((panel) => {
@@ -286,6 +276,21 @@
       rail.appendChild(fig);
     });
 
+
+    // On the mobile mosaic the full set is very tall, so collapse it behind a
+    // "see more". The CSS rule that hides the overflow only exists under the
+    // mobile breakpoint, so this class is inert on desktop.
+    const moreBtn = document.getElementById('galleryMore');
+    if (moreBtn) {
+      rail.classList.add('is-collapsed');
+      moreBtn.addEventListener('click', () => {
+        const collapsed = rail.classList.toggle('is-collapsed');
+        moreBtn.setAttribute('aria-expanded', String(!collapsed));
+        moreBtn.querySelector('span').textContent = collapsed ? 'See more' : 'Show less';
+        if (collapsed) rail.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        if (hasGSAP) ScrollTrigger.refresh();
+      });
+    }
 
     // Drag-to-scroll only applies while the rail is actually a horizontal strip;
     // on narrow screens it becomes a static mosaic grid.
