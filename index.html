@@ -30,7 +30,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="preload" as="image" href="assets/images/hero/tooth-art.jpg">
+<link rel="preload" as="image" href="assets/images/hero/tooth-hero.jpg" media="(min-width: 760px)">
+<link rel="preload" as="image" href="assets/images/hero/tooth-hero-portrait.jpg" media="(max-width: 759px)">
 <link rel="stylesheet" href="css/style.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -52,8 +53,7 @@
       <a href="#expertise"><em>03</em> Expertise</a>
       <a href="#cases"><em>04</em> Case Work</a>
       <a href="#gallery"><em>05</em> Gallery</a>
-      <a href="#credentials"><em>06</em> Credentials</a>
-      <a href="#research"><em>07</em> Research</a>
+      <a href="#research"><em>06</em> Research</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
@@ -68,7 +68,7 @@
 <!-- ============ HERO ============ -->
 <section id="hero" class="hero">
   <div class="hero-media">
-    <div class="hero-bg" id="heroBg" style="background-image:url('assets/images/hero/tooth-art.jpg')"></div>
+    <div class="hero-bg" id="heroBg"></div>
     <div class="hero-scrim"></div>
   </div>
 
@@ -118,6 +118,61 @@
         </figure>
       </div>
     </div>
+
+    <div class="about-credentials">
+      <p class="eyebrow" data-anim="fade">Credentials</p>
+<div class="timeline" id="timeline">
+      <span class="timeline-rail"><i id="timelineFill"></i></span>
+
+      <article class="tl-item" data-anim="fade">
+        <div class="tl-meta">
+          <span class="tl-dot"></span>
+          <p class="tl-org">Saveetha University</p>
+        </div>
+        <div class="tl-body">
+          <h3>Master's in Conservative Dentistry &amp; Endodontics <span>MDS</span></h3>
+          <ul>
+            <li>Best Postgraduate Student, Saveetha Dental College</li>
+            <li>Young Achiever in Dentistry</li>
+            <li>750+ endodontic procedures &middot; 2 years of micro-endodontic practice</li>
+            <li>100+ aesthetic procedures &middot; digital dentistry and CAD-CAM</li>
+            <li>9 Scopus-indexed publications</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tl-item" data-anim="fade">
+        <div class="tl-meta">
+          <span class="tl-dot"></span>
+          <p class="tl-org">Maharashtra University of Health Sciences</p>
+        </div>
+        <div class="tl-body">
+          <h3>Bachelor of Dental Surgery <span>BDS</span></h3>
+          <ul>
+            <li>Final-year college topper</li>
+            <li>Maharashtra State Rank 3 — final-year BDS examinations</li>
+            <li>Gold medal — university topper, Human Physiology &amp; Biochemistry</li>
+            <li>Distinction in all years of undergraduation</li>
+            <li>Cultural Excellence Award</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="tl-item" data-anim="fade">
+        <div class="tl-meta">
+          <span class="tl-dot"></span>
+          <p class="tl-org">Clinical Practice</p>
+        </div>
+        <div class="tl-body">
+          <h3>Work Experience</h3>
+          <ul>
+            <li>2 years — Odontoville Dental Clinic, Dental Associate</li>
+            <li>6 months — Smt. Kashibai Navale Medical Hospital, Pune</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -131,6 +186,12 @@
     </header>
 
     <div class="quotes" data-anim="fade">
+      <figure class="quote-media">
+        <img id="quoteImage" src="assets/images/testimonials/microscope-1.jpg"
+             alt="Dr. Saee Anawalikar at the operating microscope" loading="lazy" decoding="async">
+      </figure>
+
+      <div class="quote-body">
       <div class="quote-stage" id="quoteStage">
         <blockquote class="quote active">
           <span class="quote-stars" aria-label="Rated 5 out of 5">★★★★★</span>
@@ -201,6 +262,7 @@
         <button id="quotePrev" aria-label="Previous testimonial">&larr;</button>
         <span class="quote-count"><b id="quoteCurrent">1</b> / <span id="quoteTotal">6</span></span>
         <button id="quoteNext" aria-label="Next testimonial">&rarr;</button>
+      </div>
       </div>
     </div>
   </div>
@@ -310,115 +372,69 @@
   <div class="journey-rail" id="journeyRail"></div>
 </section>
 
-<!-- ============ 06 CREDENTIALS ============ -->
-<section id="credentials" class="section section-alt">
+<!-- ============ 06 RESEARCH ============ -->
+<section id="research" class="section section-alt">
   <div class="shell">
     <header class="section-head">
       <span class="section-index">06</span>
-      <h2 class="section-title" data-split>Credentials</h2>
-      <p class="section-lede" data-anim="fade">Education, distinctions and clinical training.</p>
-    </header>
-
-    <div class="timeline" id="timeline">
-      <span class="timeline-rail"><i id="timelineFill"></i></span>
-
-      <article class="tl-item" data-anim="fade">
-        <div class="tl-meta">
-          <span class="tl-dot"></span>
-          <p class="tl-org">Saveetha University</p>
-        </div>
-        <div class="tl-body">
-          <h3>Master's in Conservative Dentistry &amp; Endodontics <span>MDS</span></h3>
-          <ul>
-            <li>Best Postgraduate Student, Saveetha Dental College</li>
-            <li>Young Achiever in Dentistry</li>
-            <li>750+ endodontic procedures &middot; 2 years of micro-endodontic practice</li>
-            <li>100+ aesthetic procedures &middot; digital dentistry and CAD-CAM</li>
-            <li>9 Scopus-indexed publications</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="tl-item" data-anim="fade">
-        <div class="tl-meta">
-          <span class="tl-dot"></span>
-          <p class="tl-org">Maharashtra University of Health Sciences</p>
-        </div>
-        <div class="tl-body">
-          <h3>Bachelor of Dental Surgery <span>BDS</span></h3>
-          <ul>
-            <li>Final-year college topper</li>
-            <li>Maharashtra State Rank 3 — final-year BDS examinations</li>
-            <li>Gold medal — university topper, Human Physiology &amp; Biochemistry</li>
-            <li>Distinction in all years of undergraduation</li>
-            <li>Cultural Excellence Award</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="tl-item" data-anim="fade">
-        <div class="tl-meta">
-          <span class="tl-dot"></span>
-          <p class="tl-org">Clinical Practice</p>
-        </div>
-        <div class="tl-body">
-          <h3>Work Experience</h3>
-          <ul>
-            <li>2 years — Odontoville Dental Clinic, Dental Associate</li>
-            <li>6 months — Smt. Kashibai Navale Medical Hospital, Pune</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 07 RESEARCH ============ -->
-<section id="research" class="section">
-  <div class="shell">
-    <header class="section-head">
-      <span class="section-index">07</span>
       <h2 class="section-title" data-split>Research</h2>
-      <p class="section-lede" data-anim="fade">Selected work from nine Scopus-indexed publications in conservative dentistry and endodontics.</p>
+      <p class="section-lede" data-anim="fade">Selected work from nine Scopus-indexed publications. Each opens the published paper.</p>
     </header>
 
     <ol class="pub-list">
-      <li class="pub" data-full="assets/images/publications/pub-2.jpg" data-anim="fade">
-        <span class="pub-index">01</span>
-        <div class="pub-main">
-          <h3>Development and characterization of a novel zein-based delivery vehicle to enhance the efficacy of calcium hydroxide</h3>
-          <p class="pub-meta">Journal of Dental Specialities &middot; 2026 &middot; 14(1):113–121</p>
-        </div>
-        <figure class="pub-thumb"><img src="assets/images/publications/pub-2-thumb.jpg" alt="" loading="lazy" decoding="async"></figure>
-        <span class="pub-view">View</span>
+      <li class="pub" data-anim="fade">
+        <a class="pub-link" href="https://www.ovid.com/jnls/jioh/pdf/10.4103/jioh.jioh_27_26~antibacterial-and-remineralizing-effects-of-surface" target="_blank" rel="noopener noreferrer">
+          <span class="pub-index">01</span>
+          <div class="pub-main">
+            <h3>Antibacterial and remineralizing effects of surface pre-reacted glass-ionomer fillers in restorative materials: a systematic review</h3>
+            <p class="pub-meta">Journal of International Oral Health &middot; 2026 &middot; 18(4):290–297</p>
+          </div>
+          <figure class="pub-thumb pub-thumb--mark" aria-hidden="true"><span>JIOH</span></figure>
+          <span class="pub-view">Read paper</span>
+        </a>
       </li>
-      <li class="pub" data-full="assets/images/publications/pub-3.jpg" data-anim="fade">
-        <span class="pub-index">02</span>
-        <div class="pub-main">
-          <h3>Patterns, predictors, and decision-support in antibiotic and analgesic use in endodontics: a cross-sectional survey</h3>
-          <p class="pub-meta">Saudi Endodontic Journal &middot; 2026 &middot; 16:245–50</p>
-        </div>
-        <figure class="pub-thumb"><img src="assets/images/publications/pub-3-thumb.jpg" alt="" loading="lazy" decoding="async"></figure>
-        <span class="pub-view">View</span>
+      <li class="pub" data-anim="fade">
+        <a class="pub-link" href="https://www.ovid.com/jnls/senj/pdf/10.4103/sej.sej_226_25~patterns-predictors-and-decision-support-in-antibiotic-and" target="_blank" rel="noopener noreferrer">
+          <span class="pub-index">02</span>
+          <div class="pub-main">
+            <h3>Patterns, predictors, and decision-support in antibiotic and analgesic use in endodontics: a cross-sectional survey</h3>
+            <p class="pub-meta">Saudi Endodontic Journal &middot; 2026 &middot; 16(2):245–250</p>
+          </div>
+          <figure class="pub-thumb"><img src="assets/images/publications/pub-3-thumb.jpg" alt="" loading="lazy" decoding="async"></figure>
+          <span class="pub-view">Read paper</span>
+        </a>
       </li>
-      <li class="pub" data-full="assets/images/publications/pub-1.jpg" data-anim="fade">
-        <span class="pub-index">03</span>
-        <div class="pub-main">
-          <h3>Green synthesis of selenium oxide nanoparticles using <em>Pleurotus ostreatus</em>: preparation, characterization and antimicrobial efficacy</h3>
-          <p class="pub-meta">Asian Journal of Pharmaceutics &middot; 2025 &middot; 19(3):1239</p>
-        </div>
-        <figure class="pub-thumb"><img src="assets/images/publications/pub-1-thumb.jpg" alt="" loading="lazy" decoding="async"></figure>
-        <span class="pub-view">View</span>
+      <li class="pub" data-anim="fade">
+        <a class="pub-link" href="https://jdsits.in/archive/volume/14/issue/1/article/26725/pdf" target="_blank" rel="noopener noreferrer">
+          <span class="pub-index">03</span>
+          <div class="pub-main">
+            <h3>Development and characterization of a novel zein-based delivery vehicle to enhance the efficacy of calcium hydroxide</h3>
+            <p class="pub-meta">Journal of Dental Specialities &middot; 2026 &middot; 14(1):113–121</p>
+          </div>
+          <figure class="pub-thumb"><img src="assets/images/publications/pub-2-thumb.jpg" alt="" loading="lazy" decoding="async"></figure>
+          <span class="pub-view">Read paper</span>
+        </a>
+      </li>
+      <li class="pub" data-anim="fade">
+        <a class="pub-link" href="https://www.asiapharmaceutics.info/index.php/ajp/article/view/6756" target="_blank" rel="noopener noreferrer">
+          <span class="pub-index">04</span>
+          <div class="pub-main">
+            <h3>Green synthesis of selenium oxide nanoparticles using <em>Pleurotus ostreatus</em>: preparation, characterization and antimicrobial efficacy</h3>
+            <p class="pub-meta">Asian Journal of Pharmaceutics &middot; 2025 &middot; 19(3):1239</p>
+          </div>
+          <figure class="pub-thumb"><img src="assets/images/publications/pub-1-thumb.jpg" alt="" loading="lazy" decoding="async"></figure>
+          <span class="pub-view">Read paper</span>
+        </a>
       </li>
     </ol>
   </div>
 </section>
 
-<!-- ============ 08 CONTACT ============ -->
+<!-- ============ 07 CONTACT ============ -->
 <section id="contact" class="section contact">
   <div class="shell">
     <header class="section-head">
-      <span class="section-index">08</span>
+      <span class="section-index">07</span>
       <h2 class="section-title contact-title" data-split>Let's talk</h2>
     </header>
 

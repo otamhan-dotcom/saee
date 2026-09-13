@@ -249,18 +249,27 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
 .hero-media { position: absolute; inset: 0; z-index: -2; }
 .hero-bg {
   position: absolute;
-  inset: -12% 0 -12% 0;
+  inset: -8% 0 -8% 0;
+  /* Portrait plate by default; the 16:9 plate takes over on wider screens.
+     Both are black-backed, so they blend into the hero's own background. */
+  background-image: url('../assets/images/hero/tooth-hero-portrait.jpg');
   background-size: cover;
-  background-position: center 40%;
-  opacity: 0.62;
-  filter: grayscale(0.1) contrast(1.08) saturate(1.1);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-color: #010101;
+  opacity: 0.95;
   will-change: transform;
 }
+@media (min-width: 760px) {
+  .hero-bg { background-image: url('../assets/images/hero/tooth-hero.jpg'); }
+}
+/* The image is already black, so the scrim only has to lift the left side
+   where the type sits — the tooth stays clean on the right. */
 .hero-scrim {
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(20,17,15,0.85) 0%, rgba(20,17,15,0.35) 35%, rgba(20,17,15,0.92) 100%),
-    radial-gradient(120% 80% at 50% 45%, rgba(20,17,15,0.1) 0%, rgba(20,17,15,0.85) 100%);
+    linear-gradient(90deg, rgba(1,1,1,0.92) 0%, rgba(1,1,1,0.78) 32%, rgba(1,1,1,0.18) 62%, rgba(1,1,1,0) 100%),
+    linear-gradient(180deg, rgba(1,1,1,0.7) 0%, rgba(1,1,1,0.15) 38%, rgba(1,1,1,0.55) 100%);
 }
 
 .hero-inner {
@@ -702,22 +711,36 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
    04 VOICES
    ============================================================ */
 .quotes {
-  max-width: 900px;
-  position: relative;
-  padding-left: clamp(0px, 4vw, 68px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(1.8rem, 5vw, 4rem);
+  align-items: center;
 }
-/* Oversized quote mark as a fixed anchor for the rotating quotes */
-.quotes::before {
+.quote-media { overflow: hidden; background: var(--paper); }
+.quote-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.quote-body { position: relative; }
+/* Oversized quote mark anchoring the rotating quotes */
+.quote-body::before {
   content: '“';
   position: absolute;
-  left: 0; top: -0.28em;
+  left: 0; top: -0.55em;
   font-family: var(--f-display);
-  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-size: clamp(3rem, 6vw, 4.5rem);
   line-height: 1;
   color: var(--gold-light);
   pointer-events: none;
 }
-@media (max-width: 640px) { .quotes::before { display: none; } }
+
+@media (max-width: 860px) {
+  .quotes { grid-template-columns: 1fr; gap: 1.8rem; }
+  .quote-media img { aspect-ratio: 16 / 10; object-position: center 25%; }
+}
+@media (max-width: 640px) { .quote-body::before { display: none; } }
 
 .quote-stage { position: relative; }
 .quote {
@@ -843,9 +866,19 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   object-fit: cover;
   transition: transform 0.9s var(--ease);
   pointer-events: none;
-  filter: saturate(0.95);
 }
 .journey-rail figure:hover img { transform: scale(1.05); }
+.journey-rail figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 2rem 0.9rem 0.8rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(0deg, rgba(20,17,15,0.9) 0%, rgba(20,17,15,0) 100%);
+  pointer-events: none;
+}
 
 /* Stagger every other frame so the rail reads as a composition, not a filmstrip */
 .journey-rail figure:nth-child(even) { align-self: flex-end; }
@@ -873,8 +906,15 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   .journey-rail figure:nth-child(3n) { width: auto; }
 }
 
+/* ---------- Credentials, now folded into About ---------- */
+.about-credentials {
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
 /* ============================================================
-   06 CREDENTIALS — timeline
+   CREDENTIALS — timeline
    ============================================================ */
 .timeline { position: relative; padding-left: clamp(1.5rem, 4vw, 3rem); }
 .timeline-rail {
@@ -951,16 +991,14 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
    07 RESEARCH
    ============================================================ */
 .pub-list { border-top: 1px solid var(--line); }
-.pub {
-  position: relative;
+.pub { position: relative; border-bottom: 1px solid var(--line); }
+.pub-link {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
   gap: clamp(1rem, 3vw, 2.5rem);
   padding-block: clamp(1.8rem, 3.2vw, 2.6rem);
-  border-bottom: 1px solid var(--line);
   cursor: pointer;
-  transition: background 0.5s var(--ease);
 }
 .pub::after {
   content: '';
@@ -1009,6 +1047,20 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   transition: transform 0.8s var(--ease);
 }
 .pub:hover .pub-thumb img { transform: scale(1.08); }
+
+/* Typographic stand-in where no journal page scan exists */
+.pub-thumb--mark {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 4;
+  background: var(--paper);
+}
+.pub-thumb--mark span {
+  font-family: var(--f-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
 .pub-view {
   font-size: 0.7rem;
   letter-spacing: 0.16em;

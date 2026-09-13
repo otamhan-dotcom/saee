@@ -261,14 +261,31 @@
   /* ---------------- Gallery rail (built from files + drag to scroll) ---------------- */
   const rail = document.getElementById('journeyRail');
   if (rail) {
-    for (let i = 1; i <= 18; i++) {
-      const full = `assets/images/journey/photo-${i}.jpg`;
-      const fig = document.createElement('figure');
-      fig.dataset.full = full;
-      // Grid shows the small render; the full-size file is only fetched by the lightbox.
-      fig.innerHTML = `<img src="assets/images/journey/photo-${i}-thumb.jpg" alt="Postgraduate life and recognition" loading="lazy" decoding="async">`;
-      rail.appendChild(fig);
+    // Prizes and recognitions lead the gallery, then postgraduate life.
+    const GALLERY = [
+      { src: 'assets/images/prizes/best-postgraduate-student',        label: 'Best Postgraduate Student' },
+      { src: 'assets/images/prizes/best-postgraduate-student-1',      label: 'Best Postgraduate Student' },
+      { src: 'assets/images/prizes/best-paper-adai-national-conference',   label: 'Best Paper — ADAI National Conference' },
+      { src: 'assets/images/prizes/best-poster-iacde-national-convention', label: 'Best Poster — IACDE National Convention' },
+      { src: 'assets/images/prizes/best-poster-presentation-star-summit',  label: 'Best Poster Presentation — STAR Summit' },
+      { src: 'assets/images/prizes/star-summit-poster-presentation',  label: 'Poster Presentation — STAR Summit' },
+      { src: 'assets/images/prizes/pfa-fellowship',                   label: 'PFA Fellowship' },
+      { src: 'assets/images/prizes/cbct-workshop',                    label: 'CBCT Workshop' },
+      { src: 'assets/images/prizes/btr-file-retrieval-workshop',      label: 'BTR File Retrieval Workshop' },
+    ];
+    for (let i = 1; i <= 10; i++) {
+      GALLERY.push({ src: `assets/images/journey/photo-${i}`, label: 'Postgraduate life' });
     }
+
+    GALLERY.forEach(({ src, label }) => {
+      const fig = document.createElement('figure');
+      fig.dataset.full = `${src}.jpg`;
+      fig.innerHTML =
+        `<img src="${src}-thumb.jpg" alt="${label}" loading="lazy" decoding="async">` +
+        `<figcaption>${label}</figcaption>`;
+      rail.appendChild(fig);
+    });
+
 
     // Drag-to-scroll only applies while the rail is actually a horizontal strip;
     // on narrow screens it becomes a static mosaic grid.
@@ -340,6 +357,12 @@
   const quoteCurrent = document.getElementById('quoteCurrent');
   const quoteTotal = document.getElementById('quoteTotal');
 
+  const quoteImage = document.getElementById('quoteImage');
+  // Cycles alongside the quotes. Add more paths here and they join the rotation.
+  const QUOTE_IMAGES = [
+    'assets/images/testimonials/microscope-1.jpg',
+  ];
+
   if (quotes.length && quoteStage) {
     let qi = 0;
     let qTimer = null;
@@ -367,6 +390,24 @@
 
       quotes.forEach((q) => q.classList.remove('active'));
       to.classList.add('active');
+
+      // Swap the accompanying photo, crossfading so it doesn't pop
+      if (quoteImage && QUOTE_IMAGES.length > 1) {
+        const next = QUOTE_IMAGES[qi % QUOTE_IMAGES.length];
+        if (!quoteImage.src.endsWith(next)) {
+          if (hasGSAP && !reduced) {
+            gsap.to(quoteImage, {
+              opacity: 0, duration: 0.3, ease: 'power2.in',
+              onComplete: () => {
+                quoteImage.src = next;
+                gsap.to(quoteImage, { opacity: 1, duration: 0.5, ease: 'power2.out' });
+              },
+            });
+          } else {
+            quoteImage.src = next;
+          }
+        }
+      }
 
       if (!hasGSAP || reduced) {
         gsap?.set?.(quotes, { clearProps: 'all' });
