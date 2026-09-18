@@ -290,7 +290,14 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
 }
 
 /* ---------- Framed portrait ---------- */
-.hero-frame { display: none; margin: 0; }
+/* Phones/tablets: a smaller print stacked above the name. The caption is
+   dropped here because her name sits directly beneath it. */
+.hero-frame {
+  order: -1;
+  margin: 0 0 clamp(1.6rem, 4vh, 2.4rem);
+  width: clamp(150px, 40vw, 240px);
+}
+.hero-frame figcaption { display: none; }
 
 @media (min-width: 1024px) {
   .hero-inner {
@@ -298,17 +305,18 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
     column-gap: clamp(2.5rem, 6vw, 6rem);
   }
   .hero-frame {
-    display: block;
+    order: 0;
     width: clamp(250px, 25vw, 380px);
-    margin-right: clamp(0px, 1.5vw, 1.5rem);   /* room for the offset rule */
+    margin: 0 clamp(0px, 1.5vw, 1.5rem) 0 0;   /* room for the offset rule */
   }
+  .hero-frame figcaption { display: block; }
 }
 
 /* A print on a cream mat, with a gold hairline offset behind it */
 .hero-frame-photo {
   position: relative;
   isolation: isolate;
-  padding: 10px;
+  padding: clamp(6px, 0.8vw, 10px);
   background: var(--paper);
   box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.85);
 }
@@ -316,7 +324,7 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   content: '';
   position: absolute;
   inset: 0;
-  transform: translate(16px, 16px);
+  transform: translate(clamp(8px, 1.2vw, 16px), clamp(8px, 1.2vw, 16px));
   border: 1px solid rgba(217, 189, 138, 0.55);
   z-index: -1;
   pointer-events: none;
