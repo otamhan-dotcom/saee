@@ -38,6 +38,17 @@ sips -s format jpeg -s formatOptions 72 -Z 700 photo.jpg --out photo-thumb.jpg
 
 Reference the `-thumb` version in `src` and the full-size one in `data-full`.
 
+## Before committing CSS or JS changes
+
+```bash
+python3 scripts/stamp-assets.py
+```
+
+This rewrites the `?v=` hash on the stylesheet and script links in
+`index.html`. GitHub Pages lets browsers cache CSS/JS for 10 minutes, so
+without it a visitor can get the new page with the old stylesheet — new
+markup rendered with stale styles (e.g. images blowing up to full size).
+
 ## Running locally
 
 ```bash
