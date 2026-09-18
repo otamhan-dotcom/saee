@@ -260,8 +260,15 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   opacity: 0.95;
   will-change: transform;
 }
+/* Three plates, matched to what shares the hero at each width:
+   phone      -> portrait plate, tooth centred
+   tablet     -> wide plate, tooth centred (her portrait is hidden here)
+   desktop    -> wide plate, tooth shifted left to leave her the right third */
 @media (min-width: 760px) {
-  .hero-bg { background-image: url('../assets/images/hero/tooth-hero.jpg'); }
+  .hero-bg { background-image: url('../assets/images/hero/tooth-hero-centre.jpg'); }
+}
+@media (min-width: 1160px) {
+  .hero-bg { background-image: url('../assets/images/hero/tooth-hero-wide.jpg'); }
 }
 /* The image is already black, so the scrim only has to lift the left side
    where the type sits — the tooth stays clean on the right. */
@@ -270,6 +277,27 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   background:
     linear-gradient(90deg, rgba(1,1,1,0.92) 0%, rgba(1,1,1,0.78) 32%, rgba(1,1,1,0.18) 62%, rgba(1,1,1,0) 100%),
     linear-gradient(180deg, rgba(1,1,1,0.7) 0%, rgba(1,1,1,0.15) 38%, rgba(1,1,1,0.55) 100%);
+}
+
+/* Her portrait fills the empty right third. It sits above the scrim so the
+   left-weighted darkening never dims her; the bottom dissolve is baked into
+   the image so she fades into the stats bar rather than being cut at the lap. */
+.hero-portrait {
+  position: absolute;
+  right: clamp(1rem, 4vw, 4.5rem);
+  bottom: 0;
+  height: min(88%, 860px);
+  width: auto;
+  /* Pinned so the box keeps her proportions even while the 1px stub is showing */
+  aspect-ratio: 1080 / 1600;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+}
+/* Measured against her silhouette: below ~1160px the headline runs into her
+   hair, so she only appears once there's room. */
+@media (max-width: 1159px) {
+  .hero-portrait { display: none; }
 }
 
 .hero-inner {
@@ -297,9 +325,11 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   max-width: 13ch;
   margin-bottom: clamp(1.5rem, 3vw, 2.4rem);
 }
+/* Surname set in the same face, weight and style as the rest of the name —
+   only the colour distinguishes it. */
 .hero-title em {
-  font-style: italic;
-  font-weight: 300;
+  font-style: normal;
+  font-weight: inherit;
   color: var(--gold-light);
 }
 
@@ -937,67 +967,29 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   .journey-rail figure:nth-child(3n) { width: auto; }
 }
 
-/* ---------- Credentials, folded into About ---------- */
-.about-credentials {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  padding-top: clamp(1.8rem, 3vw, 2.5rem);
+/* ---------- CV download ---------- */
+.about-cv {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.2rem;
+  margin-top: clamp(1.8rem, 3.5vw, 2.6rem);
+  padding-top: clamp(1.4rem, 2.5vw, 1.9rem);
   border-top: 1px solid var(--line);
 }
-.cred-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
-  gap: clamp(1.8rem, 5vw, 4.5rem);
-  align-items: start;
+.about-cv .btn::after {
+  content: '';
+  width: 7px; height: 7px;
+  margin-left: 0.7rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
 }
-.cred-col .eyebrow { margin-bottom: 1rem; }
-
-.cred-row {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.95rem;
-  padding-block: 0.95rem;
-  border-top: 1px solid var(--line);
-}
-.cred-row:last-child { border-bottom: 1px solid var(--line); }
-
-.cred-badge {
-  align-self: start;
-  margin-top: 0.15em;
-  font-family: var(--f-body);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  white-space: nowrap;
-  color: var(--oxblood);
-  border: 1px solid var(--gold-light);
-  border-radius: 100px;
-  padding: 0.35em 0.7em;
-}
-.cred-badge--soft { color: var(--ink-soft); border-color: var(--line); }
-
-.cred-body h4 {
-  font-size: var(--step-0);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.2rem;
-}
-.cred-org {
-  font-size: 0.74rem;
-  letter-spacing: 0.06em;
+.about-cv-meta {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin: 0;
-}
-.cred-notes {
-  margin: 0.45rem 0 0;
-  font-size: 0.82rem;
-  line-height: 1.5;
   color: var(--ink-soft);
-}
-
-@media (max-width: 860px) {
-  .cred-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
 /* ============================================================

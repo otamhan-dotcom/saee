@@ -30,7 +30,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="preload" as="image" href="assets/images/hero/tooth-hero.jpg" media="(min-width: 760px)">
+<link rel="preload" as="image" href="assets/images/hero/tooth-hero-wide.jpg" media="(min-width: 1160px)">
+<link rel="preload" as="image" href="assets/images/hero/tooth-hero-centre.jpg" media="(min-width: 760px) and (max-width: 1159px)">
 <link rel="preload" as="image" href="assets/images/hero/tooth-hero-portrait.jpg" media="(max-width: 759px)">
 <link rel="stylesheet" href="css/style.css">
 <script>document.documentElement.classList.add('js');</script>
@@ -70,6 +71,13 @@
   <div class="hero-media">
     <div class="hero-bg" id="heroBg"></div>
     <div class="hero-scrim"></div>
+    <!-- Only screens wide enough to show her fetch the file; others get a 1px stub -->
+    <picture>
+      <source media="(min-width: 1160px)" srcset="assets/images/hero/saee-portrait.webp" type="image/webp">
+      <img class="hero-portrait" id="heroPortrait"
+           src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+           alt="Dr. Saee Anawalikar" width="1080" height="1600" fetchpriority="high">
+    </picture>
   </div>
 
   <div class="shell hero-inner">
@@ -100,11 +108,19 @@
 
     <div class="about-feature">
       <div class="about-text">
-        <h3 class="about-sub" data-split>Science, precision and creativity.</h3>
-        <p class="about-lede" data-anim="fade">Dr. Saee chose dentistry for the balance it strikes — not simply understanding disease, but using her hands and her judgement to make a visible difference in someone's life.</p>
-        <p class="about-copy" data-anim="fade">She holds an MDS in Conservative Dentistry and Endodontics from Saveetha University, and a BDS from Maharashtra University of Health Sciences, where she graduated as a final-year college topper. Her practice spans advanced endodontics, restorative and aesthetic dentistry.</p>
-        <p class="about-principle" data-anim="fade">Preserve more, intervene less — and always do what is best for the patient.</p>
+        <h3 class="about-sub" data-split>Precision, preservation and evidence-based practice.</h3>
+        <p class="about-lede" data-anim="fade">I am Dr. Saee Anawalikar, a resident in Conservative Dentistry and Endodontics with a clinical focus on microendodontics, restorative dentistry, and aesthetic dental care.</p>
+        <p class="about-copy" data-anim="fade">My journey in dentistry began in Pune, where I completed my undergraduate training as a college topper, before moving to Chennai to pursue my passion for Endodontics.</p>
+        <p class="about-copy" data-anim="fade">My approach to dentistry is centred on precision, preservation, and evidence-based practice, with an emphasis on conserving natural tooth structure and achieving predictable, long-term outcomes.</p>
+        <p class="about-copy" data-anim="fade">I believe dentistry is a continuous process of learning and refinement. As I move forward, I hope to combine evidence-based endodontics, clinical excellence, innovation, and patient-centred care while continuing to grow both as a clinician and as an individual.</p>
         <p class="about-sign" data-anim="fade">Saee Anawalikar</p>
+
+        <div class="about-cv" data-anim="fade">
+          <a class="btn btn-primary" href="assets/docs/Saee-Anawalikar-CV.pdf" download="Saee-Anawalikar-CV.pdf" data-magnetic>
+            Download CV
+          </a>
+          <span class="about-cv-meta">PDF &middot; 1 page &middot; 1 MB</span>
+        </div>
       </div>
 
       <div class="about-plates">
@@ -119,51 +135,6 @@
       </div>
     </div>
 
-    <div class="about-credentials">
-      <div class="cred-grid">
-        <div class="cred-col">
-          <p class="eyebrow" data-anim="fade">Education</p>
-
-          <div class="cred-row" data-anim="fade">
-            <span class="cred-badge">MDS</span>
-            <div class="cred-body">
-              <h4>Conservative Dentistry &amp; Endodontics</h4>
-              <p class="cred-org">Saveetha University</p>
-              <p class="cred-notes">Best Postgraduate Student &middot; Young Achiever in Dentistry</p>
-            </div>
-          </div>
-
-          <div class="cred-row" data-anim="fade">
-            <span class="cred-badge">BDS</span>
-            <div class="cred-body">
-              <h4>Bachelor of Dental Surgery</h4>
-              <p class="cred-org">Maharashtra University of Health Sciences</p>
-              <p class="cred-notes">Final-year college topper &middot; State Rank 3 &middot; Gold medallist, Human Physiology &amp; Biochemistry &middot; Distinction in all years &middot; Cultural Excellence Award</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="cred-col">
-          <p class="eyebrow" data-anim="fade">Experience</p>
-
-          <div class="cred-row" data-anim="fade">
-            <span class="cred-badge cred-badge--soft">2 yrs</span>
-            <div class="cred-body">
-              <h4>Odontoville Dental Clinic</h4>
-              <p class="cred-org">Dental Associate</p>
-            </div>
-          </div>
-
-          <div class="cred-row" data-anim="fade">
-            <span class="cred-badge cred-badge--soft">6 mo</span>
-            <div class="cred-body">
-              <h4>Smt. Kashibai Navale Medical Hospital</h4>
-              <p class="cred-org">Pune</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
