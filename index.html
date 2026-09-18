@@ -30,8 +30,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="preload" as="image" href="assets/images/hero/tooth-hero-wide.jpg" media="(min-width: 1160px)">
-<link rel="preload" as="image" href="assets/images/hero/tooth-hero-centre.jpg" media="(min-width: 760px) and (max-width: 1159px)">
+<link rel="preload" as="image" href="assets/images/hero/tooth-hero-wide.jpg" media="(min-width: 1024px)">
+<link rel="preload" as="image" href="assets/images/hero/tooth-hero-centre.jpg" media="(min-width: 760px) and (max-width: 1023px)">
 <link rel="preload" as="image" href="assets/images/hero/tooth-hero-portrait.jpg" media="(max-width: 759px)">
 <link rel="stylesheet" href="css/style.css">
 <script>document.documentElement.classList.add('js');</script>
@@ -71,16 +71,10 @@
   <div class="hero-media">
     <div class="hero-bg" id="heroBg"></div>
     <div class="hero-scrim"></div>
-    <!-- Only screens wide enough to show her fetch the file; others get a 1px stub -->
-    <picture>
-      <source media="(min-width: 1160px)" srcset="assets/images/hero/saee-portrait.webp" type="image/webp">
-      <img class="hero-portrait" id="heroPortrait"
-           src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-           alt="Dr. Saee Anawalikar" width="1080" height="1600" fetchpriority="high">
-    </picture>
   </div>
 
   <div class="shell hero-inner">
+    <div class="hero-copy">
     <p class="hero-eyebrow" data-anim="fade">BDS &middot; MDS Resident &middot; Conservative Dentistry &amp; Endodontics</p>
     <h1 class="hero-title" data-split>Dr. Saee <em>Anawalikar</em></h1>
     <p class="hero-lede" data-anim="fade">Precision endodontics and aesthetic dentistry — built on a simple principle: <em>preserve more, intervene less.</em></p>
@@ -88,6 +82,15 @@
       <a href="#cases" class="btn btn-primary" data-magnetic>View Case Work</a>
       <a href="#contact" class="btn btn-line" data-magnetic>Get in Touch</a>
     </div>
+    </div>
+
+    <figure class="hero-frame" data-anim="fade">
+      <div class="hero-frame-photo">
+        <img src="assets/images/hero/saee-framed.jpg" alt="Dr. Saee Anawalikar"
+             width="960" height="1200" fetchpriority="high">
+      </div>
+      <figcaption>Dr. Saee Anawalikar <span>MDS Resident &middot; Saveetha University</span></figcaption>
+    </figure>
   </div>
 
   <div class="hero-meta shell" data-anim="fade">

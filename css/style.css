@@ -262,12 +262,12 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
 }
 /* Three plates, matched to what shares the hero at each width:
    phone      -> portrait plate, tooth centred
-   tablet     -> wide plate, tooth centred (her portrait is hidden here)
-   desktop    -> wide plate, tooth shifted left to leave her the right third */
+   tablet     -> wide plate, tooth centred
+   desktop    -> wide plate, tooth shifted left to leave room for the framed portrait */
 @media (min-width: 760px) {
   .hero-bg { background-image: url('../assets/images/hero/tooth-hero-centre.jpg'); }
 }
-@media (min-width: 1160px) {
+@media (min-width: 1024px) {
   .hero-bg { background-image: url('../assets/images/hero/tooth-hero-wide.jpg'); }
 }
 /* The image is already black, so the scrim only has to lift the left side
@@ -279,34 +279,67 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
     linear-gradient(180deg, rgba(1,1,1,0.7) 0%, rgba(1,1,1,0.15) 38%, rgba(1,1,1,0.55) 100%);
 }
 
-/* Her portrait fills the empty right third. It sits above the scrim so the
-   left-weighted darkening never dims her; the bottom dissolve is baked into
-   the image so she fades into the stats bar rather than being cut at the lap. */
-.hero-portrait {
-  position: absolute;
-  right: clamp(1rem, 4vw, 4.5rem);
-  bottom: 0;
-  height: min(88%, 860px);
-  width: auto;
-  /* Pinned so the box keeps her proportions even while the 1px stub is showing */
-  aspect-ratio: 1080 / 1600;
-  max-width: none;
-  pointer-events: none;
-  user-select: none;
-}
-/* Measured against her silhouette: below ~1160px the headline runs into her
-   hair, so she only appears once there's room. */
-@media (max-width: 1159px) {
-  .hero-portrait { display: none; }
-}
-
 .hero-inner {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
   /* bias the block slightly above true centre so it doesn't read as bottom-heavy */
   padding-bottom: clamp(1rem, 7vh, 4.5rem);
+}
+
+/* ---------- Framed portrait ---------- */
+.hero-frame { display: none; margin: 0; }
+
+@media (min-width: 1024px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(2.5rem, 6vw, 6rem);
+  }
+  .hero-frame {
+    display: block;
+    width: clamp(250px, 25vw, 380px);
+    margin-right: clamp(0px, 1.5vw, 1.5rem);   /* room for the offset rule */
+  }
+}
+
+/* A print on a cream mat, with a gold hairline offset behind it */
+.hero-frame-photo {
+  position: relative;
+  isolation: isolate;
+  padding: 10px;
+  background: var(--paper);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.85);
+}
+.hero-frame-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(16px, 16px);
+  border: 1px solid rgba(217, 189, 138, 0.55);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-frame-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.hero-frame figcaption {
+  margin-top: 1.9rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.85);
+}
+.hero-frame figcaption span {
+  display: block;
+  margin-top: 0.35rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+  font-size: 0.64rem;
 }
 
 .hero-eyebrow {
