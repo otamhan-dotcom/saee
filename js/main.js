@@ -366,7 +366,6 @@
   // Cycles alongside the quotes. Add more paths here and they join the rotation.
   const QUOTE_IMAGES = [
     'assets/images/testimonials/microscope-1.jpg',
-    'assets/images/testimonials/portrait-1.jpg',
   ];
   // Warm the cache so swapping never shows a blank frame mid-crossfade
   QUOTE_IMAGES.forEach((src) => { const i = new Image(); i.src = src; });
