@@ -229,8 +229,8 @@
   });
 
   /* ---------------- Case filters ---------------- */
-  const filters = document.querySelectorAll('.filter');
-  const panels = document.querySelectorAll('.case-panel');
+  const filters = document.querySelectorAll('#cases .filter');
+  const panels = document.querySelectorAll('#cases .case-panel');
   filters.forEach((btn) => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.tab;
@@ -317,6 +317,99 @@
     rail.addEventListener('click', (e) => {
       if (moved > 6) { e.stopPropagation(); e.preventDefault(); }
     }, true);
+  }
+
+  /* ---------------- Gallery: Photos / Videos tabs ---------------- */
+  const gTabs = document.querySelectorAll('[data-gtab]');
+  const gPanels = document.querySelectorAll('[data-gpanel]');
+  const vRail = document.getElementById('videoRail');
+  const vNav = document.querySelector('.video-nav');
+  const vPrev = document.getElementById('videoPrev');
+  const vNext = document.getElementById('videoNext');
+
+  // Arrows only appear when the cards actually overflow, and grey out at the ends
+  const updateVideoNav = () => {
+    if (!vRail || !vNav) return;
+    const overflow = vRail.scrollWidth > vRail.clientWidth + 4;
+    vNav.hidden = !overflow;
+    vPrev.disabled = vRail.scrollLeft <= 2;
+    vNext.disabled = vRail.scrollLeft + vRail.clientWidth >= vRail.scrollWidth - 2;
+  };
+
+  gTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const key = tab.dataset.gtab;
+      gTabs.forEach((t) => {
+        const on = t === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      gPanels.forEach((p) => p.classList.toggle('active', p.dataset.gpanel === key));
+      updateVideoNav();
+      if (hasGSAP) ScrollTrigger.refresh();
+    });
+  });
+
+  if (vRail) {
+    const step = () => {
+      const card = vRail.querySelector('.video-card');
+      return card ? card.getBoundingClientRect().width + 16 : 300;
+    };
+    vPrev.addEventListener('click', () => vRail.scrollBy({ left: -step(), behavior: 'smooth' }));
+    vNext.addEventListener('click', () => vRail.scrollBy({ left: step(), behavior: 'smooth' }));
+    vRail.addEventListener('scroll', updateVideoNav, { passive: true });
+    window.addEventListener('resize', updateVideoNav);
+  }
+
+  /* ---------------- Video modal ---------------- */
+  const vModal = document.getElementById('videoModal');
+  const vPlayer = document.getElementById('videoPlayer');
+  const vTitle = document.getElementById('videoTitle');
+  const vClose = document.getElementById('videoClose');
+  let vOpener = null;
+
+  const openVideo = (card) => {
+    vOpener = card;
+    vPlayer.poster = card.dataset.poster;
+    vPlayer.src = card.dataset.video;
+    vTitle.textContent = card.dataset.title;
+    vModal.hidden = false;
+    if (lenis) lenis.stop();
+    vClose.focus();
+    if (hasGSAP && !reduced) gsap.fromTo(vModal, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+    // Opened by a click, so play() is allowed; if a browser still refuses,
+    // the controls are there and the viewer can press play themselves.
+    const p = vPlayer.play();
+    if (p && p.catch) p.catch(() => {});
+  };
+
+  const closeVideo = () => {
+    if (!vModal || vModal.hidden) return;
+    vPlayer.pause();
+    vPlayer.removeAttribute('src');   // stops the download, not just playback
+    vPlayer.load();
+    vModal.hidden = true;
+    if (lenis) lenis.start();
+    if (vOpener) vOpener.focus();
+  };
+
+  if (vModal) {
+    document.querySelectorAll('.video-card').forEach((card) => {
+      card.addEventListener('click', () => openVideo(card));
+    });
+    vClose.addEventListener('click', closeVideo);
+    vModal.addEventListener('click', (e) => { if (e.target === vModal) closeVideo(); });
+    document.addEventListener('keydown', (e) => {
+      if (vModal.hidden) return;
+      if (e.key === 'Escape') closeVideo();
+      // keep keyboard focus inside the dialog
+      if (e.key === 'Tab') {
+        const stops = [vClose, vPlayer];
+        const i = stops.indexOf(document.activeElement);
+        e.preventDefault();
+        stops[(i + (e.shiftKey ? -1 : 1) + stops.length) % stops.length].focus();
+      }
+    });
   }
 
   /* ---------------- Lightbox ---------------- */

@@ -954,6 +954,160 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
 .journey-rail figure:nth-child(even) { align-self: flex-end; }
 .journey-rail figure:nth-child(3n) { width: clamp(280px, 32vw, 440px); }
 
+/* ---------- Gallery: Photos / Videos tabs ---------- */
+.gallery-tabs { margin: 0 0 clamp(1.6rem, 3vw, 2.4rem); }
+.gallery-panel { display: none; }
+.gallery-panel.active { display: block; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Video carousel ---------- */
+.video-rail {
+  display: flex;
+  gap: clamp(0.8rem, 1.6vw, 1.3rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 var(--gutter) 1rem;
+  /* snap to the padded edge, not the raw edge, so card 1 keeps the page margin */
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.video-rail::-webkit-scrollbar { display: none; }
+@media (min-width: 1340px) {
+  /* line the first card up with the page's content edge */
+  .video-rail {
+    padding-inline: calc((100vw - 1340px) / 2 + var(--gutter));
+    scroll-padding-inline: calc((100vw - 1340px) / 2 + var(--gutter));
+  }
+}
+
+.video-card {
+  position: relative;
+  padding: 0;             /* buttons ship with default padding that framed the poster */
+  border: 0;
+  flex: 0 0 clamp(210px, 26vw, 320px);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+.video-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.video-card:hover img { transform: scale(1.05); }
+.video-card::after {                 /* legibility gradient for the title */
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(20,17,15,0.85) 0%, rgba(20,17,15,0) 45%);
+  pointer-events: none;
+}
+
+.video-play {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 68px; height: 68px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 244, 239, 0.8);
+  background: rgba(20, 17, 15, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1;
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease), scale 0.4s var(--ease);
+}
+.video-play::before {                /* the triangle */
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  translate: -35% -50%;
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent var(--paper);
+}
+.video-card:hover .video-play,
+.video-card:focus-visible .video-play { background: var(--oxblood); border-color: var(--oxblood); scale: 1.08; }
+
+.video-meta {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+  color: #fff;
+}
+.video-name { font-family: var(--f-display); font-size: var(--step-1); line-height: 1.15; }
+.video-time { font-size: 0.68rem; letter-spacing: 0.12em; color: var(--gold-light); font-variant-numeric: tabular-nums; }
+
+.video-nav {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.video-nav[hidden] { display: none; }
+.video-nav button {
+  width: 48px; height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease), opacity 0.3s;
+}
+.video-nav button:hover:not(:disabled) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.video-nav button:disabled { opacity: 0.3; cursor: default; }
+
+/* ---------- Video modal ---------- */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3.5rem, 7vh, 5rem) clamp(1rem, 4vw, 3rem);
+  background: rgba(12, 10, 9, 0.95);
+}
+.video-modal[hidden] { display: none; }
+.video-modal-inner { display: flex; flex-direction: column; align-items: center; max-height: 100%; }
+.video-modal video {
+  display: block;
+  max-height: calc(100vh - 9rem);
+  max-height: calc(100svh - 9rem);
+  max-width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #000;
+}
+.video-modal-title {
+  margin: 0.9rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 244, 239, 0.7);
+}
+.video-modal-close {
+  position: fixed;
+  top: clamp(0.8rem, 2.5vw, 1.8rem);
+  right: clamp(0.8rem, 2.5vw, 2rem);
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  font-size: 1.8rem; line-height: 1;
+  color: var(--paper);
+  border: 1px solid rgba(247, 244, 239, 0.35);
+  border-radius: 50%;
+  z-index: 1;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+}
+.video-modal-close:hover { background: var(--paper); color: var(--ink); }
+
 /* "See more" only exists on the mobile mosaic; the desktop rail scrolls sideways
    so it costs no vertical space. */
 .gallery-more-wrap { display: none; }
