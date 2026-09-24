@@ -581,50 +581,89 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   opacity: 0.9;
 }
 
-/* ---------- Contact / profile icons ---------- */
-.about-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.4rem;
+/* ---------- Connect band (contact + profiles) ---------- */
+.connect {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2.2rem, 4vw, 3.2rem);
+  border-top: 1px solid var(--line);
+  text-align: center;
 }
-.about-links a {
+.connect-eyebrow {
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-soft);
+  margin: 0 0 clamp(1.6rem, 3vw, 2.4rem);
+}
+.connect-list {
+  /* Equal columns, not flex: the labels differ in width ("Call" vs
+     "ResearchGate") and would otherwise space the circles unevenly. */
   display: grid;
-  place-items: center;
-  width: 44px; height: 44px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+  max-width: 880px;
+  margin-inline: auto;
+}
+.connect-tile {
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  color: var(--ink);
+}
+.connect-tile svg {
+  width: clamp(88px, 9vw, 108px);
+  height: clamp(88px, 9vw, 108px);
+  padding: clamp(24px, 2.4vw, 30px);
   border: 1px solid var(--line);
   border-radius: 50%;
-  color: var(--ink-mid);
-  transition: color 0.35s var(--ease), border-color 0.35s var(--ease),
-              background 0.35s var(--ease), transform 0.35s var(--ease);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  background: var(--paper);
+  transition: color 0.4s var(--ease), background 0.4s var(--ease),
+              border-color 0.4s var(--ease), transform 0.4s var(--ease);
 }
-.about-links a:hover {
+.connect-tile:hover svg {
   color: var(--paper);
   background: var(--oxblood);
   border-color: var(--oxblood);
-  transform: translateY(-2px);
+  transform: translateY(-6px);
 }
-.about-links svg {
-  width: 19px; height: 19px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.connect-label {
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.4s var(--ease);
 }
+.connect-tile:hover .connect-label { color: var(--oxblood); }
+
 /* brand marks that read better as solid shapes */
-.about-links .icon-solid { fill: currentColor; stroke: none; }
-.about-links .icon-dot { fill: currentColor; stroke: none; }
+.connect-tile .icon-solid { fill: currentColor; stroke: none; }
+.connect-tile .icon-dot { fill: currentColor; stroke: none; }
 /* ResearchGate's mark is its letterform, set inside the same rounded square */
-.about-links .icon-rg {
+.connect-tile .icon-rg {
   font-family: var(--f-body);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.02em;
   fill: currentColor;
   stroke: none;
   text-anchor: middle;
   dominant-baseline: central;
+}
+
+@media (max-width: 720px) {
+  /* Three across, then two centred underneath: a six-column grid with each
+     tile spanning two, and the last row offset by one column. */
+  .connect-list { grid-template-columns: repeat(6, 1fr); gap: 1.8rem 0.5rem; }
+  .connect-list li { grid-column: span 2; }
+  .connect-list li:nth-child(4) { grid-column: 2 / span 2; }
+  .connect-list li:nth-child(5) { grid-column: 4 / span 2; }
+  .connect-tile svg { width: 76px; height: 76px; padding: 20px; }
+  .connect-label { font-size: 0.7rem; letter-spacing: 0.1em; }
 }
 
 /* ---------- Plated figures (journal-style) ---------- */
