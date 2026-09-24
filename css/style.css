@@ -581,6 +581,52 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   opacity: 0.9;
 }
 
+/* ---------- Contact / profile icons ---------- */
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.4rem;
+}
+.about-links a {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink-mid);
+  transition: color 0.35s var(--ease), border-color 0.35s var(--ease),
+              background 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.about-links a:hover {
+  color: var(--paper);
+  background: var(--oxblood);
+  border-color: var(--oxblood);
+  transform: translateY(-2px);
+}
+.about-links svg {
+  width: 19px; height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* brand marks that read better as solid shapes */
+.about-links .icon-solid { fill: currentColor; stroke: none; }
+.about-links .icon-dot { fill: currentColor; stroke: none; }
+/* ResearchGate's mark is its letterform, set inside the same rounded square */
+.about-links .icon-rg {
+  font-family: var(--f-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  fill: currentColor;
+  stroke: none;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
 /* ---------- Plated figures (journal-style) ---------- */
 .about-plates {
   position: relative;
