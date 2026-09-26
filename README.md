@@ -18,7 +18,7 @@ GSAP + ScrollTrigger (animation) and Lenis (smooth scroll).
 
 ## Page order
 
-`01 About · 02 Testimonials · 03 Expertise · 04 Case Work · 05 Gallery · 06 Credentials · 07 Research · 08 Contact`
+`01 About · 02 Expertise · 03 Case Gallery · 04 Awards · 05 Research · 06 Testimonials · 07 Contact`
 
 ## Editing content
 

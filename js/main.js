@@ -439,7 +439,8 @@
   document.addEventListener('click', (e) => {
     const item = e.target.closest('[data-full]');
     if (!item) return;
-    const caption = item.querySelector('figcaption')?.textContent.replace(/^\d+/, '').trim()
+    const caption = item.dataset.caption
+      || item.querySelector('figcaption')?.textContent.replace(/^\d+/, '').trim()
       || item.querySelector('h3')?.textContent.trim()
       || '';
     openLightbox(item.dataset.full, caption);
