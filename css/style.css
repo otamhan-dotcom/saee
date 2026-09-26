@@ -581,6 +581,56 @@ html.js [data-reveal-img] img { clip-path: inset(100% 0 0 0); transform: scale(1
   opacity: 0.9;
 }
 
+/* ---------- Photography strip (Awards) ---------- */
+.photo-strip {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(2.2rem, 4vw, 3.2rem);
+  border-top: 1px solid var(--line);
+}
+.photo-strip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.2rem;
+  margin-bottom: clamp(1.4rem, 2.5vw, 2rem);
+}
+.photo-strip-head h3 {
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+}
+.photo-strip-head p {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+.photo-strip-row {
+  display: grid;
+  /* two landscape frames and one portrait, held to a common height */
+  grid-template-columns: 1.5fr 1.5fr 0.85fr;
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+}
+.photo-strip-row figure {
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: var(--ink);
+}
+.photo-strip-row img {
+  width: 100%;
+  height: clamp(220px, 27vw, 420px);
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.photo-strip-row figure:hover img { transform: scale(1.04); }
+
+@media (max-width: 720px) {
+  /* The portrait piece keeps the full width below the landscape pair. */
+  .photo-strip-row { grid-template-columns: 1fr 1fr; }
+  .photo-strip-row figure:last-child { grid-column: 1 / -1; }
+  .photo-strip-row figure:last-child img { height: clamp(260px, 62vw, 420px); }
+  .photo-strip-row img { height: clamp(150px, 34vw, 240px); }
+}
+
 /* ---------- Certificates grid (Awards) ---------- */
 .cert-grid {
   display: grid;
